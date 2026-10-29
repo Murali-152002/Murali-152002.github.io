@@ -1,0 +1,366 @@
+<title>Muralidhar Reddy Anumandla | Data Engineer</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Data Engineer on regulated healthcare data. Azure, Databricks, PySpark, Delta Lake, SQL.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout: one narrow reading column, a medallion-layer demo as the single bold moment, quiet everything else. */
+:root{
+  --bg:#F1F4F6; --surface:#FFFFFF; --ink:#12202B; --muted:#52636F; --line:#D5DDE3;
+  --accent:#0E6B66; --accent-ink:#FFFFFF;
+  --bronze:#B36A32; --silver:#7F8E9C; --gold:#BF9511;
+  --font-display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --font-body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0D1419; --surface:#151E25; --ink:#E8EEF2; --muted:#98A8B4; --line:#26343E;
+  --accent:#4FD1C5; --accent-ink:#06201E; --bronze:#D9915A; --silver:#A4B1BD; --gold:#E3BC3B; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0D1419; --surface:#151E25; --ink:#E8EEF2; --muted:#98A8B4; --line:#26343E;
+  --accent:#4FD1C5; --accent-ink:#06201E; --bronze:#D9915A; --silver:#A4B1BD; --gold:#E3BC3B; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--font-body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0}
+a{color:inherit}
+.wrap{max-width:880px;margin:0 auto}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+
+header.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--line);margin:0 calc(-1*max(16px,env(safe-area-inset-left,0px)))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px max(16px,env(safe-area-inset-left,0px))}
+.brand{font:700 15px var(--font-display);letter-spacing:.2px;text-decoration:none}
+nav{display:flex;gap:4px 16px;flex-wrap:wrap;font:500 13px var(--font-mono)}
+nav a{text-decoration:none;color:var(--muted);padding:4px 0}
+nav a:hover{color:var(--ink)}
+#theme{font:500 12px var(--font-mono);background:none;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:4px 9px;cursor:pointer}
+#theme:hover{color:var(--ink)}
+
+.hero{padding:56px 0 36px}
+.kicker{font:500 13px var(--font-mono);color:var(--accent);letter-spacing:.06em;text-transform:uppercase}
+h1{font:800 clamp(34px,6.4vw,64px)/1.04 var(--font-display);margin:14px 0 18px;text-wrap:balance;letter-spacing:-.02em}
+h1 em{font-style:normal;color:var(--accent)}
+.lede{max-width:62ch;font-size:18px;color:var(--muted);margin:0 0 26px}
+.cta{display:flex;flex-wrap:wrap;gap:10px}
+.btn{font:600 14px var(--font-body);text-decoration:none;padding:10px 16px;border-radius:8px;border:1px solid var(--line);background:var(--surface);cursor:pointer;color:var(--ink)}
+.btn.main{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn:hover{filter:brightness(1.06)}
+.proof{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:0;margin-top:40px;border-top:1px solid var(--line)}
+.proof div{padding:18px 18px 4px 0}
+.proof b{display:block;font:700 30px var(--font-display);letter-spacing:-.01em}
+.proof span{font-size:14px;color:var(--muted)}
+
+section{padding:44px 0;border-top:1px solid var(--line)}
+h2{font:700 clamp(24px,3.6vw,32px)/1.15 var(--font-display);margin:0 0 6px;letter-spacing:-.01em;text-wrap:balance}
+.sub{color:var(--muted);margin:0 0 24px;max-width:64ch}
+
+/* pipeline demo */
+.demo{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px}
+.layers{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;font:500 12px var(--font-mono);letter-spacing:.05em;text-transform:uppercase;margin-bottom:8px}
+.layers span{padding:4px 8px;border-radius:5px;border:1px solid var(--line)}
+.layers .b{color:var(--bronze);border-color:var(--bronze)}.layers .s{color:var(--silver);border-color:var(--silver)}.layers .g{color:var(--gold);border-color:var(--gold)}
+canvas{display:block;width:100%;height:170px}
+.counts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:14px 0;font-variant-numeric:tabular-nums}
+.counts div{border-left:3px solid var(--line);padding-left:10px}
+.counts .b{border-color:var(--bronze)}.counts .s{border-color:var(--silver)}.counts .g{border-color:var(--gold)}
+.counts b{display:block;font:700 24px var(--font-display)}
+.counts span{font-size:13px;color:var(--muted)}
+.demo .note{font-size:13px;color:var(--muted);margin:10px 0 0}
+
+/* case */
+.case{display:grid;grid-template-columns:1.1fr 1fr;gap:28px}
+.bars{display:flex;flex-direction:column;gap:14px;font-variant-numeric:tabular-nums}
+.bar-row small{display:block;font:500 12px var(--font-mono);color:var(--muted);margin-bottom:4px}
+.track{height:30px;background:var(--surface);border:1px solid var(--line);border-radius:6px;overflow:hidden;position:relative}
+.fill{height:100%;display:flex;align-items:center;padding-left:10px;font:600 13px var(--font-mono);color:#fff;white-space:nowrap}
+.fill.before{width:100%;background:#B4483C}
+.fill.after{width:15%;min-width:84px;background:var(--accent);color:var(--accent-ink)}
+.case ul{margin:0;padding-left:18px}.case li{margin:0 0 8px}
+
+/* experience */
+.job{display:grid;grid-template-columns:150px 1fr;gap:6px 24px}
+.job .when{font:500 13px var(--font-mono);color:var(--muted);padding-top:4px}
+.job h3{font:700 20px var(--font-display);margin:0}
+.job .role{color:var(--muted);margin:2px 0 14px}
+.job ul{margin:0;padding-left:18px}.job li{margin:0 0 9px}
+.job li b{font-weight:600}
+
+/* projects */
+.projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.card h3{font:700 19px var(--font-display);margin:0}
+.card .stack{font:400 12px/1.5 var(--font-mono);color:var(--muted)}
+.card ul{margin:0;padding-left:18px;font-size:15px}.card li{margin:0 0 6px}
+.card a.lnk{margin-top:auto;font:500 13px var(--font-mono);color:var(--accent);text-decoration:none}
+.card a.lnk:hover{text-decoration:underline}
+.tag{font:500 11px var(--font-mono);letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+
+/* skills */
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px 28px}
+.skills h3{font:500 12px var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font-size:13.5px;padding:3px 10px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.chips span.soft{color:var(--muted);border-style:dashed}
+.legend{font-size:13px;color:var(--muted);margin-top:18px}
+
+.edu{display:grid;gap:14px}
+.edu div{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.edu b{font-weight:600}.edu span{color:var(--muted);font:500 13px var(--font-mono)}
+
+/* contact */
+.contact{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.contact .item{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;min-width:0}
+.contact small{display:block;font:500 11px var(--font-mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.contact .val{font:500 15px var(--font-mono);overflow-wrap:anywhere;user-select:all}
+.contact a.val{text-decoration:none;display:block}
+.contact button{margin-top:8px;font:500 12px var(--font-mono);background:none;border:1px solid var(--line);color:var(--ink);border-radius:6px;padding:3px 9px;cursor:pointer}
+footer{padding:28px 0 44px;color:var(--muted);font:400 13px var(--font-mono);border-top:1px solid var(--line)}
+
+@media (max-width:720px){
+  .job{grid-template-columns:1fr}.case{grid-template-columns:1fr}
+  .hero{padding-top:36px}
+  nav{display:none}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+
+<header class="bar"><div class="wrap">
+  <a class="brand" href="#top">Murali Reddy Anumandla</a>
+  <nav aria-label="Sections"><a href="#pipeline">Pipeline</a><a href="#case">Case</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#contact">Contact</a></nav>
+  <button id="theme" type="button" aria-label="Toggle color theme">Theme</button>
+</div></header>
+
+<main class="wrap" id="top">
+  <div class="hero">
+    <div class="kicker">Data Engineer · Richmond, VA · open to relocation</div>
+    <h1>I make healthcare data pipelines <em>fast, clean and rerunnable.</em></h1>
+    <p class="lede">At UnitedHealth Group (through Appex Systems) I build and monitor Azure Data Factory and Databricks pipelines in PySpark and SQL on regulated member data. M.S. Computer Science, VCU.</p>
+    <div class="cta">
+      <a class="btn main" href="Anumandla_Resume_Full.pdf" target="_blank" rel="noopener">View resume (PDF)</a>
+      <a class="btn" href="https://github.com/Murali-152002" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/muralidhar-reddy-anumandla-070576241" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <div class="proof">
+      <div><b>20 h → 2-4 h</b><span>Spark job on ~140M rows, from an OOM crash</span></div>
+      <div><b>25+</b><span>production pipelines monitored</span></div>
+      <div><b>~3.6M</b><span>legacy consent records migrated and reconciled</span></div>
+    </div>
+  </div>
+
+  <section id="pipeline">
+    <h2>How I think about a pipeline</h2>
+    <p class="sub">Raw data lands in Bronze, gets cleaned and deduplicated in Silver, and is modeled for reporting in Gold. Press run to watch my NYC Mobility pipeline load 48.7M real taxi trips.</p>
+    <div class="demo">
+      <div class="layers"><span class="b">Bronze · raw</span><span class="s">Silver · clean</span><span class="g">Gold · star schema</span></div>
+      <canvas id="cv" role="img" aria-label="Rows flowing through Bronze, Silver and Gold layers. Duplicates are removed in Silver."></canvas>
+      <div class="counts">
+        <div class="b"><b id="c1">48,722,602</b><span>real taxi trips ingested (2025)</span></div>
+        <div class="s"><b id="c2">978,679</b><span>rows quarantined in Silver (rule failures)</span></div>
+        <div class="g"><b id="c3">47,743,923</b><span>rows merged into silver, then modeled in dbt</span></div>
+      </div>
+      <button class="btn main" id="run" type="button">Run pipeline</button>
+      <p class="note">Row counts are from a real local run over all of 2025 (NYC TLC yellow-taxi data). Bronze = silver + quarantine in every month. The dots are illustrative.</p>
+    </div>
+  </section>
+
+  <section id="case">
+    <h2>Case file: the 140M-row Spark job</h2>
+    <p class="sub">A job on about 140 million rows was failing with out-of-memory errors after 20 hours. I took it to a 2-4 hour run.</p>
+    <div class="case">
+      <div class="bars" role="img" aria-label="Runtime before: 20 hours and failing. After: 2 to 4 hours.">
+        <div class="bar-row"><small>BEFORE · 20 h, OOM crash</small><div class="track"><div class="fill before">20 h</div></div></div>
+        <div class="bar-row"><small>AFTER · 2-4 h (drawn at 4 h)</small><div class="track"><div class="fill after" style="width:20%">2-4 h</div></div></div>
+        <small style="font:500 12px var(--font-mono);color:var(--muted)">About 5-10x faster</small>
+      </div>
+      <ul>
+        <li><b>Cause:</b> most likely a faulty derived column on the membership source ID. Deriving it meant exploding a struct column, which created millions of records and a huge shuffle.</li>
+        <li><b>Fix:</b> window-function dedup, early filtering, partition tuning and Parquet staging.</li>
+        <li><b>Follow-through:</b> traced the related duplicate member-coverage records through Unity Catalog lineage and briefed the analytics head directly.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2>Experience</h2>
+    <div class="job" style="margin-top:20px">
+      <div class="when">Jun 2025 – Present<br>Remote</div>
+      <div>
+        <h3>Appex Systems, client UnitedHealth Group</h3>
+        <p class="role">Data Engineer, full-time (Feb 2026 – Present) · Data Engineer Intern (Jun – Dec 2025)</p>
+        <ul>
+          <li>Own ETL/ELT pipelines end to end on <b>Azure Data Factory</b> and <b>Databricks Workflows</b> in PySpark and SQL. They MERGE on key columns, so reruns are safe and create no duplicates.</li>
+          <li>Monitor <b>25+ production pipelines</b> in Databricks and ADF Monitor, handle on-call issues, and post a daily run-status report to a multi-team group chat.</li>
+          <li>Built a <b>Kafka-fed Spark Structured Streaming</b> pipeline into partitioned silver Delta tables. It decrypts PII with Key Vault and publishes unsubscribe flags that control who the email platform can contact.</li>
+          <li>Fixed duplicate member-coverage records in an 8-table streaming pipeline: a faulty derived column, an incorrect merge key and a source-side issue.</li>
+          <li>Tested and reconciled the migration of <b>~3.6M legacy records</b> to a category-level consent model, and documented the source-to-target mappings.</li>
+          <li>Fixed a stalled file-ingestion pipeline owned by another developer. A cluster upgrade had broken the code, and I explained the root cause to the business users who reported it.</li>
+          <li>Validated a deduplication feature across 20 tables and wrote the SQL validation checks behind business-validation meetings. Validated Unity Catalog access-control tags on 72 tables.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <p class="sub">The first two run on real public data (NYC TLC, CMS Medicare); the other two use synthetic data. All run locally, code is on GitHub.</p>
+    <div class="projects">
+      <article class="card">
+        <span class="tag">Incremental · multi-source</span>
+        <h3>NYC Mobility Pipeline (taxi + weather)</h3>
+        <div class="stack">PySpark · Delta Lake MERGE · dbt · Airflow · GitHub Actions</div>
+        <ul>
+          <li>Monthly MERGE pipeline over 48.7M real NYC taxi trips joined with daily weather. A new month loads in about 78 s versus 15.6 min for a full rebuild, and bronze reconciles to silver plus quarantine in all 12 months.</li>
+          <li>Late-data test: 20,000 missing rows and 5,000 stale fares merged into a table identical to a clean load (0 differing rows, 0 duplicates). Replaying it changes nothing.</li>
+          <li>Profiling showed my first rule wrongly rejected 1.9M valid flex-fare trips. I fixed it and reloaded. 37 dbt models and tests, an Airflow DAG and CI on every push.</li>
+        </ul>
+        <a class="lnk" href="https://github.com/Murali-152002/Data-engineering-My-Projects/tree/main/nyc-mobility-incremental-pipeline" target="_blank" rel="noopener">View code on GitHub →</a>
+      </article>
+      <article class="card">
+        <span class="tag">Lakehouse · data quality</span>
+        <h3>CMS Claims Lakehouse</h3>
+        <div class="stack">PySpark · Delta Lake · dbt · DuckDB · pytest · GitHub Actions</div>
+        <ul>
+          <li>Bronze/silver/gold pipeline over two real CMS Medicare files (145,879 inpatient rows and 1.42M Part D prescribers), with a quarantine table and a bronze = silver + quarantine check that fails the job if rows go missing.</li>
+          <li>A second silver run uses Delta MERGE and leaves both tables unchanged. 42 dbt models and tests plus 6 pytest tests pass, and CI runs them on every push.</li>
+          <li>Found that DRG 470 (joint replacement) Medicare payments vary 2.1x across states, from $11,943 (VT) to $25,079 (MD).</li>
+        </ul>
+        <a class="lnk" href="https://github.com/Murali-152002/Data-engineering-My-Projects/tree/main/claims-lakehouse-cms-delta-dbt" target="_blank" rel="noopener">View code on GitHub →</a>
+      </article>
+      <article class="card">
+        <span class="tag">Orchestration · modeling</span>
+        <h3>Orders Lakehouse</h3>
+        <div class="stack">Azure Data Factory · Delta Lake · dbt · Airflow · Flask · pytest</div>
+        <ul>
+          <li>ADF pipeline with a watermark lookup, paging loop, hourly trigger and 3 retries that loads only new or changed orders.</li>
+          <li>4 pytest tests prove the watermark moves only after every page succeeds. A rerun pulls 0 new rows.</li>
+          <li>dbt star schema with 19 tests, run inside a 4-task Airflow DAG with retries and failure alerts.</li>
+        </ul>
+        <a class="lnk" href="https://github.com/Murali-152002/Data-engineering-My-Projects/tree/main/orders-lakehouse-adf-dbt-airflow" target="_blank" rel="noopener">View code on GitHub →</a>
+      </article>
+      <article class="card">
+        <span class="tag">BI · semantic model</span>
+        <h3>Sales Analytics Dashboard</h3>
+        <div class="stack">Power BI · Power Query · DAX · DuckDB</div>
+        <ul>
+          <li>Dashboard over a 932K-row, 3-year e-commerce dataset, modeled as a star schema with 6 DAX measures.</li>
+          <li>Surfaced +18.0% and +13.8% year-over-year revenue growth, with Electronics leading by volume and profit.</li>
+          <li>Benchmarked the star schema against a flat table and reported the result as measured: the flat table was slightly faster (17.9 ms vs 20.0 ms).</li>
+        </ul>
+        <a class="lnk" href="https://github.com/Murali-152002/Data-engineering-My-Projects/tree/main/ecommerce-sales-analytics-powerbi" target="_blank" rel="noopener">View code on GitHub →</a>
+      </article>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <p class="sub">Grouped by what I use them for.</p>
+    <div class="skills">
+      <div><h3>Languages &amp; querying</h3><div class="chips"><span>SQL / T-SQL</span><span>Python</span><span>PySpark</span><span>Spark SQL</span><span>Databricks SQL</span><span>Pandas</span><span>NumPy</span><span>pytest</span></div></div>
+      <div><h3>Platforms</h3><div class="chips"><span>Azure Databricks</span><span>Delta Lake</span><span>Unity Catalog</span><span>Azure Data Factory</span><span>Databricks Workflows</span><span>ADLS Gen2</span><span>Azure SQL Database</span><span>Key Vault</span><span>Azure CLI</span></div></div>
+      <div><h3>Streaming &amp; orchestration</h3><div class="chips"><span>Kafka</span><span>Spark Structured Streaming</span><span>Apache Airflow</span><span>dbt</span><span>REST API ingestion</span></div></div>
+      <div><h3>Modeling &amp; warehousing</h3><div class="chips"><span>Star schema</span><span>Medallion architecture</span><span>ETL / ELT</span><span>Delta MERGE</span><span>Incremental loads</span><span>Partitioning</span><span>Change data capture</span></div></div>
+      <div><h3>Quality &amp; governance</h3><div class="chips"><span>Data validation</span><span>Reconciliation</span><span>Data profiling</span><span>Root-cause analysis</span><span>Access-control tags</span><span>Runbooks</span></div></div>
+      <div><h3>BI &amp; analytics</h3><div class="chips"><span>Power BI</span><span>DAX</span><span>Power Query</span><span>Excel (pivots, VBA, Solver)</span></div></div>
+      <div><h3>Engineering practice</h3><div class="chips"><span>Git / GitHub</span><span>Pull-request review</span><span>CI/CD (team releases)</span><span>Agile / Scrum</span><span>Rally</span><span>GitHub Copilot</span><span>Claude Code</span></div></div>
+      <div><h3>Coursework / working knowledge</h3><div class="chips"><span class="soft">PostgreSQL</span><span class="soft">Linux shell</span><span class="soft">C++</span><span class="soft">BERT &amp; embeddings</span><span class="soft">Statistics</span></div></div>
+    </div>
+    <p class="legend">Dashed chips are coursework or working knowledge, not production use.</p>
+  </section>
+
+  <section id="education">
+    <h2>Education</h2>
+    <div class="edu" style="margin-top:18px">
+      <div><b>Virginia Commonwealth University · M.S. Computer Science, GPA 3.90/4.0</b><span>2024 – 2025</span></div>
+      <div><b>GRIET, Hyderabad · B.Tech Computer Science &amp; Business Systems, GPA 8.31/10</b><span>2020 – 2024</span></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p class="sub">Hiring for a data engineering role? Email is the fastest way to reach me.</p>
+    <div class="contact">
+      <div class="item"><small>Email</small><span class="val" id="mail">anumandlamuralidharreddy@gmail.com</span><button type="button" id="copy">Copy email</button></div>
+      <div class="item"><small>LinkedIn</small><a class="val" href="https://www.linkedin.com/in/muralidhar-reddy-anumandla-070576241" target="_blank" rel="noopener">anumandla-muralidhar-reddy</a></div>
+      <div class="item"><small>GitHub</small><a class="val" href="https://github.com/Murali-152002" target="_blank" rel="noopener">Murali-152002</a></div>
+    </div>
+  </section>
+  <footer>Murali Reddy Anumandla · Richmond, VA</footer>
+</main>
+
+<script>
+(function(){
+  /* theme toggle */
+  var root=document.documentElement,tb=document.getElementById('theme');
+  try{var s=localStorage.getItem('theme');if(s)root.setAttribute('data-theme',s)}catch(e){}
+  tb.addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme');
+    if(!cur)cur=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+    var nx=cur==='dark'?'light':'dark';root.setAttribute('data-theme',nx);
+    try{localStorage.setItem('theme',nx)}catch(e){}
+    draw(lastP);
+  });
+
+  /* copy email */
+  var cb=document.getElementById('copy'),mail=document.getElementById('mail');
+  cb.addEventListener('click',function(){
+    function sel(){var r=document.createRange();r.selectNodeContents(mail);var g=getSelection();g.removeAllRanges();g.addRange(r);cb.textContent='Selected, press copy'}
+    try{navigator.clipboard.writeText(mail.textContent).then(function(){cb.textContent='Copied'},sel)}catch(e){sel()}
+    setTimeout(function(){cb.textContent='Copy email'},2200);
+  });
+
+  /* pipeline demo */
+  var cv=document.getElementById('cv'),ctx=cv.getContext('2d'),run=document.getElementById('run');
+  var c1=document.getElementById('c1'),c2=document.getElementById('c2'),c3=document.getElementById('c3');
+  var IN=48722602,DUP=978679,OUT=IN-DUP,W=0,H=170,dpr=1,lastP=1,raf=null;
+  var N=90,P=[];
+  for(var i=0;i<N;i++)P.push({t:i/N,y:Math.random(),dup:i%50===5,tab:i%4});
+  function css(v){return getComputedStyle(root).getPropertyValue(v).trim()}
+  function size(){dpr=window.devicePixelRatio||1;W=cv.clientWidth;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)}
+  function fmt(n){return Math.round(n).toLocaleString('en-US')}
+  function draw(p){
+    lastP=p;ctx.clearRect(0,0,W,H);
+    var z=W/3,cols=[css('--bronze'),css('--silver'),css('--gold')],line=css('--line'),ink=css('--ink');
+    for(var k=1;k<3;k++){ctx.strokeStyle=line;ctx.setLineDash([4,5]);ctx.beginPath();ctx.moveTo(k*z,0);ctx.lineTo(k*z,H);ctx.stroke()}
+    ctx.setLineDash([]);
+    /* gold tables */
+    var ty=[24,64,104,144],names=['fact_sales','dim_date','dim_product','dim_store'];
+    ctx.font='500 11px '+css('--font-mono');ctx.textBaseline='middle';
+    for(var t=0;t<4;t++){ctx.strokeStyle=cols[2];ctx.globalAlpha=.55;ctx.strokeRect(2*z+z*.52,ty[t]-10,z*.44,20);ctx.globalAlpha=1;ctx.fillStyle=ink;ctx.fillText(names[t],2*z+z*.52+8,ty[t])}
+    var rest=p>=1;
+    for(var i=0;i<N;i++){
+      var q=P[i],x,y=14+q.y*(H-28),a=1,col=cols[0];
+      var u=rest?(q.dup?0.5:1):Math.max(0,Math.min(1,(p*1.35-q.t*0.35)));
+      if(!rest&&u<=0)continue;
+      if(rest){x=q.dup?z*1.6:2*z+z*.52+10+((i*29)%Math.floor(z*.4));y=q.dup?y:ty[q.tab]+((i%3)-1)*3}
+      else{
+        x=u*W*0.93+8;
+        if(x<z)col=cols[0];else if(x<2*z)col=cols[1];else col=cols[2];
+        if(q.dup&&x>z){var f=Math.min(1,(x-z)/(z*.6));a=1-f;col=cols[1];y+=f*18}
+        else if(x>2*z+z*.52){var tt=ty[q.tab];var f2=Math.min(1,(x-(2*z+z*.52))/(z*.3));y=y+(tt-y)*f2}
+      }
+      if(rest&&q.dup)continue;
+      ctx.globalAlpha=a;ctx.fillStyle=col;ctx.fillRect(x,y-3,6,6);
+    }
+    ctx.globalAlpha=1;
+    var ing=Math.min(1,p*1.6),dd=Math.max(0,Math.min(1,(p-.3)/.35)),ld=Math.max(0,Math.min(1,(p-.45)/.55));
+    c1.textContent=fmt(IN*ing);c2.textContent=fmt(DUP*dd);c3.textContent=fmt(OUT*ld);
+  }
+  function play(){
+    if(raf)cancelAnimationFrame(raf);
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches){draw(1);return}
+    var t0=null,dur=6500;run.textContent='Running…';run.disabled=true;
+    (function step(ts){
+      if(!t0)t0=ts;var p=Math.min(1,(ts-t0)/dur);draw(p);
+      if(p<1)raf=requestAnimationFrame(step);else{run.textContent='Run again';run.disabled=false}
+    })(performance.now());
+  }
+  run.addEventListener('click',play);
+  size();draw(1);
+  addEventListener('resize',function(){size();draw(lastP)});
+})();
+</script>
