@@ -41,7 +41,9 @@ nav a:hover{color:var(--ink)}
 #theme{font:500 12px var(--font-mono);background:none;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:4px 9px;cursor:pointer}
 #theme:hover{color:var(--ink)}
 
-.hero{padding:56px 0 36px}
+.hero{padding:56px 0 36px;position:relative}
+.me{position:absolute;right:0;top:64px;width:168px;height:168px;border-radius:50%;object-fit:cover;border:3px solid var(--line)}
+@media (min-width:721px){.hero:has(.me){padding-right:210px}}
 .kicker{font:500 13px var(--font-mono);color:var(--accent);letter-spacing:.06em;text-transform:uppercase}
 h1{font:800 clamp(34px,6.4vw,64px)/1.04 var(--font-display);margin:14px 0 18px;text-wrap:balance;letter-spacing:-.02em}
 h1 em{font-style:normal;color:var(--accent)}
@@ -124,6 +126,7 @@ footer{padding:28px 0 44px;color:var(--muted);font:400 13px var(--font-mono);bor
 @media (max-width:720px){
   .job{grid-template-columns:1fr}.case{grid-template-columns:1fr}
   .hero{padding-top:36px}
+  .me{position:static;display:block;width:120px;height:120px;margin:0 0 16px}
   nav{display:none}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
@@ -137,9 +140,10 @@ footer{padding:28px 0 44px;color:var(--muted);font:400 13px var(--font-mono);bor
 
 <main class="wrap" id="top">
   <div class="hero">
+    <img class="me" src="photo.jpg" alt="Murali Reddy Anumandla" onerror="this.remove()">
     <div class="kicker">Data Engineer · Richmond, VA · open to relocation</div>
     <h1>I make healthcare data pipelines <em>fast, clean and rerunnable.</em></h1>
-    <p class="lede">At UnitedHealth Group (through Appex Systems) I build and monitor Azure Data Factory and Databricks pipelines in PySpark and SQL on regulated member data. M.S. Computer Science, VCU.</p>
+    <p class="lede">On a UnitedHealth Group client engagement I build and monitor Azure Data Factory and Databricks pipelines in PySpark and SQL on regulated member data. M.S. Computer Science, VCU.</p>
     <div class="cta">
       <a class="btn main" href="Anumandla_Resume_Full.pdf" target="_blank" rel="noopener">View resume (PDF)</a>
       <a class="btn" href="https://github.com/Murali-152002" target="_blank" rel="noopener">GitHub</a>
@@ -190,8 +194,8 @@ footer{padding:28px 0 44px;color:var(--muted);font:400 13px var(--font-mono);bor
     <div class="job" style="margin-top:20px">
       <div class="when">Jun 2025 – Present<br>Remote</div>
       <div>
-        <h3>Appex Systems, client UnitedHealth Group</h3>
-        <p class="role">Data Engineer, full-time (Feb 2026 – Present) · Data Engineer Intern (Jun – Dec 2025)</p>
+        <h3>UnitedHealth Group (Client)</h3>
+        <p class="role">Data Engineer (Feb 2026 – Present) · Data Engineer Intern (Jun – Dec 2025)</p>
         <ul>
           <li>Own ETL/ELT pipelines end to end on <b>Azure Data Factory</b> and <b>Databricks Workflows</b> in PySpark and SQL. They MERGE on key columns, so reruns are safe and create no duplicates.</li>
           <li>Monitor <b>25+ production pipelines</b> in Databricks and ADF Monitor, handle on-call issues, and post a daily run-status report to a multi-team group chat.</li>
